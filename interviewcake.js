@@ -299,7 +299,7 @@ var rectangle4 = {
 };
 
 
-var temperatures = [];
+var temperatures = [1, 5, 6, 12, 15, 5, 19, 12, 5];
 
 function insert(temp) {
   temperatures.push(temp);
@@ -307,13 +307,46 @@ function insert(temp) {
 
 function getMax(temps) {
   temps.sort(function(a,b) {
-    return a - b;
+    return b - a;
   });
-  return temps[temps.length - 1];
+  return temps[0];
 }
 
 function getMin(temps) {
-  
+  temps.sort(function(a,b) {
+    return a - b;
+  })
+  return temps[0];
+}
+
+function getMean(temps) {
+  var mean = 0;
+  for (var i = 0; i < temps.length; i++) {
+    mean += temps[i];
+  }
+  mean = mean / temps.length;
+  return mean;
+}
+
+function getMode(temps) {
+  temps.sort(function(a,b) {
+    return a - b;
+  })
+  var mode = temps[0];
+  var modeCount = 1;
+  for (var i = 0; i < temps.length; i++) {
+    var iterativeCount = 1;
+    for (var j = i + 1; j < temps.length - i; j++) {
+      if (temps[i] === temps[j]) {
+        iterativeCount++
+      }
+      if (iterativeCount > modeCount) {
+        mode = temps[i];
+        modeCount = iterativeCount;
+      }
+    }
+  }
+  return mode;
 }
 
 
